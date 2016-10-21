@@ -7,46 +7,47 @@
 \begin{document}
 \noindent
 \textbf{Background:}
-Somatic mutations occur in non-sex-cells and are not passed to offspring. While these mutations do not directly affect the evolution of a population, they can cause diseases in an individual. For example, somatic mutations are thought to cause many forms of cancer. Tobacco smoke is known to cause somatic mutations in the lungs, and studies have shown that smoking cessation dramatically lowers lung cancer risk\textsuperscript{1}. This indicates that management of somatic mutation is important for reducing cancer risk. However, little to no work has been done on normal somatic mutation patterns in mammals. Without this knowledge, we are unable to fully appreciate the extent that cancers exhibit abnormal mutation patterns. Thus, there is need for basic research on somatic mutation in normal tissues.
+Somatic mutations occur in non-sex-cells and are not passed to offspring.
+While these mutations do not directly affect the evolution of a population, they can cause diseases in an individual.
+For example, somatic mutations are thought to cause many forms of cancer.
+Tobacco smoke is known to cause somatic mutations in the lungs, and studies have shown that smoking cessation dramatically lowers lung cancer risk\textsuperscript{1}.
+This indicates that management of somatic mutation is important for reducing cancer risk.
+However, little to no work has been done on normal somatic mutation patterns in mammals.
+Without this knowledge, we are unable to fully appreciate the extent that cancers exhibit abnormal mutation patterns.
+Thus, there is need for basic research on somatic mutation in normal tissues.
 
-%There are also significant differences in the incidence rates of cancers in different tissues\textsuperscript{2}. Since many cancers are caused by somatic mutations and there is a difference in cancer incidence rates of different tissues,
-% Somatic mutations have been studied in the context of cancer, but little to no work has been done on somatic mutation patterns in normal, non-pathogenic tissue in mammals.
-
-There are significant differences in the incidence rates of cancers in different tissues. This indicates that 
-
-Each cell of a tissue express different genes than cells of another tissue, which gives each tissue different properties. When a gene is not expressed, its DNA is sometimes supercoiled\textsuperscript{2}, which is thought to offer protection from mutagens and degredation. If this is the case, different cells from different tissue types should exhibit different patterns of mutation. I will investigate how the different properties of different tissues affect their mutation rates. 
-
-
-Another important factor for understanding somatic mutations in healthy tissue is the type of genes mutated. When a gene is not expressed, its DNA may be supercoiled\textsuperscript{2}, which could offer protection from mutagens and degredation. Each cell of a tissue expresses different genes than cells of another tissue. It is currently unknown how these expression differences affect which genes are mutated in a tissue. I will investigate whether there are differences in the somatic mutation rate of different tissues. 
+Cells of different tissues have different properties.
+One of these properties that could significantly impact the patterns of somatic mutation is the tissue renewal rate, as cells that divide more frequently should have more mutations due to replication errors.
+Additionally, each cell of a tissue express different genes than cells of another tissue.
+When a gene is not expressed, its DNA is sometimes supercoiled\textsuperscript{2}, which is thought to offer protection from mutagens and degredation.
+If this is the case, different cells from different tissue types should exhibit different patterns of mutation.
+I will investigate how these properties of different tissues affect the rate and distribution of mutations in the genome using a mouse model.
 
 \textbf{Hypothesis 1:}
-%In light of this, I propose a project that will examine two questions: 1) how do mutation rates vary in different mammalian tissues and 2) are there differences in the types of genes that are mutated in different tissues?
-Mutation rates vary in different mammalian tissues, and tissues with higher %incidence of cancer will have higher background mutation rates.
-renewal rates will have more mutations.
+Mutation rates vary in different tissues, and tissues with higher renewal rates will have more mutations.
 
 %%%%Continue to work here
 \textbf{Methods:}
-To address this hypothesis, I will work with mice labs at ASU to collect cerebellum, cerebral cortex, kidney, heart, lung, stomach, uteral, parotid gland, prostate, skin, and liver tissue samples in triplicate from each of several mice. These tissues largely represent epithelial tissues which have high renewal rates\textsuperscript{3}. %and are the most common tissues affected by cancer\textsuperscript{3}.
+To address this hypothesis, I will work with mice labs at ASU to collect cerebellum, cerebral cortex, kidney, heart, lung, stomach, uteral, parotid gland, prostate, skin, and liver tissue samples in triplicate from each of several mice. These tissues represent each of the germ layers and contains many epithelial tissues, which have high renewal rates\textsuperscript{3}.
 Most of these tissues have been successfully collected and used for cell fate mapping using a small subset of genomic markers\textsuperscript{4} and should therefore be suitable for finding mutations and provide a sufficient number of mutations for analysis. Even if the sample size is insufficient for tissue-level specificity, it will be possible to pool similar tissues to improve statistical power.
 
 I will do whole-genome Illumina sequencing on each of my samples then use a De Bruijn graph mutation caller called DiscoSNP++\textsuperscript{5} to identify mutations in each of the samples. During DNA sequencing, the DNA is randomly shredded. The sequence of each small fragment, called a read, is generated. A De Bruijn graph is a way to put these reads back together to find the sequence of the original DNA. If multiple samples are used, it also finds places where these reads overlap except by one nucleotide. These locations are mutations or sequencing errors.
 
-Most methods require comparison to a reference genome and will assume that if only a small portion of reads in a sample differ from the reference, it is an error and not a mutation. Since De Bruijn graphs don't use a reference genome for comparison, it reduces false negatives from samples containing low numbers of mutations. This is important, as I expect a fairly low number of mutants in each sample. This comes at a cost of an increased false positive rate. However, I will use the replicates I collected to reduce the number of false positives. I will then compare the number of mutations appearing in each tissue type to find which samples have higher mutation rates. I will also use a traditional reference-based approach to compare the De Bruijn graph and reference-based methods.
+Most methods require comparison to a reference genome and will assume that if only a small portion of reads in a sample differ from the reference, it is an error and not a mutation. Since De Bruijn graphs don't use a reference genome for comparison, it reduces false negatives from samples containing low numbers of mutations. This is important, as I expect a fairly low number of mutants in each sample. This comes at a cost of an increased false positive rate. However, I will use the replicates I collected to reduce the number of false positives. I will then compare the number of mutations appearing in each tissue type to find which samples have higher mutation rates. I will also use a traditional reference-based approach to compare the De Bruijn graph and reference-based methods. % Can cut down this paragraph if necessary
 
-I have applied a similar method to 24 samples from a \textit{Eucalyptus} tree to successfuly detect a large number of somatic mutations in the leaves of the plant. Further development of the software capable of performing this filtration will enable me to deploy it as a computational tool usable by any scientist doing mutation studies with replicates.
+I have applied a similar method to 24 samples from a \textit{Eucalyptus} tree to successfuly detect a large number of somatic mutations in the leaves of the plant. Further development of the software capable of performing this filtration will enable me to deploy it as a computational tool usable by any scientist studying somatic mutation leveraging biological replicates.
 
 \textbf{Anticipated Results:}
-I expect that epithelial tissues will have higher mutational load than neuronal tissues. Since these cells have the highest renewal rates\textsuperscript{3} and therefore undergo more cell divisions, they should have undergone more DNA duplications, providing more opportunities to obtain mutations.
-%Of the tissues collected, prostate cancers have the highest incidence rates\textsuperscript{3} in humans.
-Thus, my hypothesis will be supported if I consistently observe higher numbers of mutations in epithelial tissues. Furthermore, it will be interesting to identify how the number of mutations change after normalizing by the average renewal rate of the tissue.  
-
-%If this is not the case, my hypothesis will be rejected. However, examining why breast tissue mutates less but becomes cancerous more frequently would make an interesting follow up analysis.
+Epithelial cells have the highest renewal rates\textsuperscript{3} and therefore undergo more cell divisions, they should have undergone more cycles of DNA replications, providing more opportunities for mutations to be introduced.
+I expect these tissues to have a higher mutational load than the other tissues.
+Thus, my hypothesis will be supported if I consistently observe higher numbers of mutations in epithelial tissues.
+%TODO: If my hypothesis is not supported, my result would still be interesting as it indicates a
 
 \textbf{Hypothesis 2:}
 The set of genes specific to a tissue will be more mutated in samples of that tissue than in samples of other tissues.
 
 \textbf{Methods:}
-I will use the data obtained in the mutation rate variation experiment to identify the genes mutated in each tissue. As mutations will be rare, I will map the mutations found to 10 megabase windows on the mouse reference genome. Then, I will identify the genes in these windows.
+I will use the data obtained in the mutation rate variation experiment described above to identify the genes mutated in each tissue. As mutations will be rare, I will map the mutations found to 10 megabase windows on the mouse reference genome. Then, I will identify the genes in these windows.
 
 The gene ontology is a controlled vocabulary used to describe the functions, associations, and cellular location of a particular gene product. I will associate each window with the gene ontology terms of the genes in that window and use a clustering algorithm to determine if the windows with mutations are annotated as specific to the tissue of the sample or not.%Additionally, I will determine whether the number of mutated cancer associated genes is higher than expected in any particular tissue.
 To rule out the effect of gene function, I will also see if genes that perform a class of functions are disproportionally mutated.
