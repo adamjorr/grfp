@@ -10,8 +10,6 @@
 Somatic mutations occur in non-sex-cells and are not passed to offspring.
 While these mutations do not directly affect the evolution of a population, they can cause diseases in an individual.
 For example, somatic mutations are thought to cause many forms of cancer.
-Tobacco smoke is known to cause somatic mutations in the lungs, and studies have shown that smoking cessation dramatically lowers lung cancer risk\textsuperscript{1}.
-This indicates that management of somatic mutation is important for reducing cancer risk.
 However, little to no work has been done on normal somatic mutation patterns in mammals.
 Without this knowledge, we are unable to fully appreciate the extent that cancers exhibit abnormal mutation patterns.
 Thus, there is need for basic research on somatic mutation in normal tissues.
@@ -28,12 +26,32 @@ Mutation rates vary in different tissues, and tissues with higher renewal rates 
 
 %%%%Continue to work here
 \textbf{Methods:}
-To address this hypothesis, I will work with mice labs at ASU to collect cerebellum, cerebral cortex, kidney, heart, lung, stomach, uteral, parotid gland, prostate, skin, and liver tissue samples in triplicate from each of several mice. These tissues represent each of the germ layers and contains many epithelial tissues, which have high renewal rates\textsuperscript{3}.
-Most of these tissues have been successfully collected and used for cell fate mapping using a small subset of genomic markers\textsuperscript{4} and should therefore be suitable for finding mutations and provide a sufficient number of mutations for analysis. Even if the sample size is insufficient for tissue-level specificity, it will be possible to pool similar tissues to improve statistical power.
+To address this hypothesis, I will work with mice labs at ASU to collect cerebellum, cerebral cortex, kidney, heart, lung, stomach, uteral, parotid gland, prostate, skin, and liver tissue samples in triplicate from each of several mice.
+These tissues represent each of the germ layers and contain many epithelial tissues, which have high renewal rates\textsuperscript{3}.
+Most of these tissues have been successfully collected and used for cell fate mapping using a small subset of genomic markers\textsuperscript{4} and should therefore be suitable for finding mutations and provide a sufficient number of mutations for analysis.
 
-I will do whole-genome Illumina sequencing on each of my samples then use a De Bruijn graph mutation caller called DiscoSNP++\textsuperscript{5} to identify mutations in each of the samples. During DNA sequencing, the DNA is randomly shredded. The sequence of each small fragment, called a read, is generated. A De Bruijn graph is a way to put these reads back together to find the sequence of the original DNA. If multiple samples are used, it also finds places where these reads overlap except by one nucleotide. These locations are mutations or sequencing errors.
+%%TODO:!
+I will do whole-genome Illumina sequencing on each of my samples then use a variant analysis pipeline such as the Genome Analysis Toolkit to identify potential mutations.
+This works by comparing the obtained sequencing data and comparing it to the mouse reference genome.
+However, as sequencing errors are common, a statistical model is necessary to determine if observed differences are true mutations or sequencing errors.
+%%%WIP!!!
+%%I think the best idea for this is: most variant callers for somatic mutations are designed to work with cancer samples, which behave fundamentally differently from normal tissues. So we may be unable to use standard methods and may need something different.
+%%
 
-Most methods require comparison to a reference genome and will assume that if only a small portion of reads in a sample differ from the reference, it is an error and not a mutation. Since De Bruijn graphs don't use a reference genome for comparison, it reduces false negatives from samples containing low numbers of mutations. This is important, as I expect a fairly low number of mutants in each sample. This comes at a cost of an increased false positive rate. However, I will use the replicates I collected to reduce the number of false positives. I will then compare the number of mutations appearing in each tissue type to find which samples have higher mutation rates. I will also use a traditional reference-based approach to compare the De Bruijn graph and reference-based methods. % Can cut down this paragraph if necessary
+ a De Bruijn graph mutation caller called DiscoSNP++\textsuperscript{5} to identify mutations in each of the samples.
+%During DNA sequencing, the DNA is randomly shredded. The sequence of each small fragment, called a read, is generated.
+A De Bruijn graph is a way to represent the DNA sequence of the sample.
+If multiple samples are used, it also finds places where these reads overlap except by one nucleotide.
+These locations are mutations or sequencing errors.
+
+A statistical model can then be applied to determine if the detected variation is an error or truly a mutation.
+Most methods require comparison to a reference genome and will assume that if only a small portion of sequencing reads in a sample differ from the reference, it is an error and not a mutation.
+Since De Bruijn graphs don't use a reference genome for comparison, it reduces false negatives from samples containing low numbers of mutations.
+This is important, as I expect a fairly low number of mutants in each sample.
+This comes at a cost of an increased false positive rate.
+However, I will use the replicates I collected to reduce the number of false positives.
+I will then compare the number of mutations appearing in each tissue type to find which samples have higher mutation rates.
+I will also use a traditional reference-based approach to compare the De Bruijn graph and reference-based methods. % Can cut down this paragraph if necessary
 
 I have applied a similar method to 24 samples from a \textit{Eucalyptus} tree to successfuly detect a large number of somatic mutations in the leaves of the plant. Further development of the software capable of performing this filtration will enable me to deploy it as a computational tool usable by any scientist studying somatic mutation leveraging biological replicates.
 
@@ -66,7 +84,17 @@ This project represents a first step in more clearly understanding somatic mutat
 %This knowledge may later be applied to humans to improve cancer diagnosis, prevention, and treatment.
 
 \textbf{Broader Impacts:}
-Understanding the link between background somatic mutation rate and cancer incidence can be clinically useful for diagnosing, preventing, and treating the disease. This knowledge will help clarify theories of the evolution and maintenance of multicellularity. I will also generate a tissue phylogeny, useful for developmental biologists. Additionally, all data generated by the project will be deposited in a repository for public use and all computational analyses and tools developed for the project will be open source and freely available for modification and use. This will aid others who attempt to pursue similar analyses or wish to develop similar tools. This project will give me the opportunity to train an undergraduate data scientist to understand how to hand and analyze large amounts of data and develop computational tools for the biology community. I will also discuss this project at a future Night of the Open Door event to educate adults and children on somatic mutation and its relation to cancer. This will help people understand the biology behind why smoking cessation reduces cancer risk. I will additionally be better able to give insight on mutation to primary and secondary school students through the Ask a Biologist program, where these students submit questions to be answered by an expert.
+Tobacco smoke is known to cause somatic mutations in the lungs, and studies have shown that smoking cessation dramatically lowers lung cancer risk\textsuperscript{1}.
+This indicates that management of somatic mutation is important for reducing cancer risk.
+Understanding the link between background somatic mutation rate and cancer incidence can be clinically useful for diagnosing, preventing, and treating the disease.
+This knowledge will help clarify theories of the evolution and maintenance of multicellularity.
+I will also generate a tissue phylogeny, useful for developmental biologists.
+Additionally, all data generated by the project will be deposited in a repository for public use and all computational analyses and tools developed for the project will be open source and freely available for modification and use.
+This will aid others who attempt to pursue similar analyses or wish to develop similar tools.
+This project will give me the opportunity to train an undergraduate data scientist to understand how to hand and analyze large amounts of data and develop computational tools for the biology community.
+I will also discuss this project at a future Night of the Open Door event to educate adults and children on somatic mutation and its relation to cancer.
+This will help people understand the biology behind why smoking cessation reduces cancer risk.
+I will additionally be better able to give insight on mutation to primary and secondary school students through the Ask a Biologist program, where these students submit questions to be answered by an expert.
 
 \begin{footnotesize}
 \textbf{References:}
