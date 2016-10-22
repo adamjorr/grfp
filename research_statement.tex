@@ -30,26 +30,15 @@ To address this hypothesis, I will work with mice labs at ASU to collect cerebel
 These tissues represent each of the germ layers and contain many epithelial tissues, which have high renewal rates\textsuperscript{3}.
 Most of these tissues have been successfully collected and used for cell fate mapping using a small subset of genomic markers\textsuperscript{4} and should therefore be suitable for finding mutations and provide a sufficient number of mutations for analysis.
 
-%%TODO:!
 I will do whole-genome Illumina sequencing on each of my samples then use a variant analysis pipeline such as the Genome Analysis Toolkit to identify potential mutations.
 This works by comparing the obtained sequencing data and comparing it to the mouse reference genome.
 However, as sequencing errors are common, a statistical model is necessary to determine if observed differences are true mutations or sequencing errors.
-%%%WIP!!!
-%%I think the best idea for this is: most variant callers for somatic mutations are designed to work with cancer samples, which behave fundamentally differently from normal tissues. So we may be unable to use standard methods and may need something different.
-%%
+Most variant callers use models designed to identify germline mutations, and most designed for use on somatic tissue assume the sample is a cancer tumor.
+Therefore, I will also use a De Bruijn graph mutation caller, such as DiscoSNP++\textsuperscript{5}, to identify mutations.
+Rather than comparing to the reference genome, a De Bruijn graph mutation caller finds places where the sequences of different samples overlap except by one nucleotide, which is the location of the putative mutation.
+By comparing the results of these two distinct methods along with the results across replicates, I will obtain a set of likely somatic mutations across various tissues.
 
- a De Bruijn graph mutation caller called DiscoSNP++\textsuperscript{5} to identify mutations in each of the samples.
-%During DNA sequencing, the DNA is randomly shredded. The sequence of each small fragment, called a read, is generated.
-A De Bruijn graph is a way to represent the DNA sequence of the sample.
-If multiple samples are used, it also finds places where these reads overlap except by one nucleotide.
-These locations are mutations or sequencing errors.
-
-A statistical model can then be applied to determine if the detected variation is an error or truly a mutation.
-Most methods require comparison to a reference genome and will assume that if only a small portion of sequencing reads in a sample differ from the reference, it is an error and not a mutation.
-Since De Bruijn graphs don't use a reference genome for comparison, it reduces false negatives from samples containing low numbers of mutations.
-This is important, as I expect a fairly low number of mutants in each sample.
-This comes at a cost of an increased false positive rate.
-However, I will use the replicates I collected to reduce the number of false positives.
+%%TODO:
 I will then compare the number of mutations appearing in each tissue type to find which samples have higher mutation rates.
 I will also use a traditional reference-based approach to compare the De Bruijn graph and reference-based methods. % Can cut down this paragraph if necessary
 
