@@ -37,10 +37,7 @@ Most variant callers use models designed to identify germline mutations, and mos
 Therefore, I will also use a De Bruijn graph mutation caller, such as DiscoSNP++\textsuperscript{5}, to identify mutations.
 Rather than comparing to the reference genome, a De Bruijn graph mutation caller finds places where the sequences of different samples overlap except by one nucleotide, which is the location of the putative mutation.
 By comparing the results of these two distinct methods along with the results across replicates, I will obtain a set of likely somatic mutations across various tissues.
-
-%%TODO:
 I will then compare the number of mutations appearing in each tissue type to find which samples have higher mutation rates.
-I will also use a traditional reference-based approach to compare the De Bruijn graph and reference-based methods. % Can cut down this paragraph if necessary
 
 I have applied a similar method to 24 samples from a \textit{Eucalyptus} tree to successfuly detect a large number of somatic mutations in the leaves of the plant. Further development of the software capable of performing this filtration will enable me to deploy it as a computational tool usable by any scientist studying somatic mutation leveraging biological replicates.
 
