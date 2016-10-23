@@ -17,24 +17,26 @@ Thus, there is need for basic research on somatic mutation in normal tissues.
 Cells of different tissues have different properties.
 One of these properties that could significantly impact the patterns of somatic mutation is the tissue renewal rate, as cells that divide more frequently should have more mutations due to replication errors.
 Additionally, each cell of a tissue express different genes than cells of another tissue.
-When a gene is not expressed, its DNA is sometimes supercoiled\textsuperscript{2}, which is thought to offer protection from mutagens and degredation.
-If this is the case, different cells from different tissue types should exhibit different patterns of mutation.
+When a gene is not expressed, its DNA is sometimes methylated, which can cause mutations.
+Additionally, cells are known to preferentially repair segments of DNA that are actively transcribed.
+This means that different cells from different tissue types should exhibit different patterns of mutation.
+However, the extent of these differences is currently unknown.
 I will investigate how these properties of different tissues affect the rate and distribution of mutations in the genome using a mouse model.
 
 \textbf{Hypothesis 1:}
 Mutation rates vary in different tissues, and tissues with higher renewal rates will have more mutations.
 
-%%%%Continue to work here
 \textbf{Methods:}
 To address this hypothesis, I will work with mice labs at ASU to collect cerebellum, cerebral cortex, kidney, heart, lung, stomach, uteral, parotid gland, prostate, skin, and liver tissue samples in triplicate from each of several mice.
-These tissues represent each of the germ layers and contain many epithelial tissues, which have high renewal rates\textsuperscript{3}.
-Most of these tissues have been successfully collected and used for cell fate mapping using a small subset of genomic markers\textsuperscript{4} and should therefore be suitable for finding mutations and provide a sufficient number of mutations for analysis.
+These tissues represent each of the germ layers and contain many epithelial tissues, which have high renewal rates\textsuperscript{1}.
+Most of these tissues have been successfully collected and used for cell fate mapping using a small subset of genomic markers\textsuperscript{2} and should therefore be suitable for finding mutations and provide a sufficient number of mutations for analysis.
 
 I will do whole-genome Illumina sequencing on each of my samples then use a variant analysis pipeline such as the Genome Analysis Toolkit to identify potential mutations.
 This works by comparing the obtained sequencing data and comparing it to the mouse reference genome.
 However, as sequencing errors are common, a statistical model is necessary to determine if observed differences are true mutations or sequencing errors.
-Most variant callers use models designed to identify germline mutations, and most designed for use on somatic tissue assume the sample is a cancer tumor.
-Therefore, I will also use a De Bruijn graph mutation caller, such as DiscoSNP++\textsuperscript{5}, to identify mutations.
+
+Most variant callers use models designed to identify germline mutations, and most designed for use on somatic tissue assume the sample is from a cancer tumor.
+Therefore, I will also use a De Bruijn graph mutation caller, such as DiscoSNP++\textsuperscript{3}, to identify mutations.
 Rather than comparing to the reference genome, a De Bruijn graph mutation caller finds places where the sequences of different samples overlap except by one nucleotide, which is the location of the putative mutation.
 By comparing the results of these two distinct methods along with the results across replicates, I will obtain a set of likely somatic mutations across various tissues.
 I will then compare the number of mutations appearing in each tissue type to find which samples have higher mutation rates.
@@ -42,55 +44,60 @@ I will then compare the number of mutations appearing in each tissue type to fin
 I have applied a similar method to 24 samples from a \textit{Eucalyptus} tree to successfuly detect a large number of somatic mutations in the leaves of the plant. Further development of the pipeline capable of identifying these mutations will enable me to deploy it as a computational tool usable by anyone studying somatic mutation with sequencing data supported by biological replicates.
 
 \textbf{Anticipated Results:}
-Epithelial cells have the highest renewal rates\textsuperscript{3} and therefore undergo more cell divisions, so they should have undergone more cycles of DNA replication.
+Epithelial cells have the highest renewal rates\textsuperscript{1} and therefore undergo more cell divisions, so they should have undergone more cycles of DNA replication.
 This provides more opportunities for mutations to be introduced.
 Therefore, I expect these tissues to have a higher mutational load than the other tissues.
 Thus, my hypothesis will be supported if I consistently observe higher numbers of mutations in epithelial tissues.
-%TODO: If my hypothesis is not supported, my result would still be interesting as it indicates a
 
 \textbf{Hypothesis 2:}
-The set of genes specific to a tissue will be more mutated in samples of that tissue than in samples of other tissues.
+The set of genes specifically expressed in one tissue will be less mutated in samples of that tissue than in samples of other tissues.
 
 \textbf{Methods:}
-I will use the data obtained in the mutation rate variation experiment described above to identify the genes mutated in each tissue. As mutations will be rare, I will map the mutations found to 10 megabase windows on the mouse reference genome. Then, I will identify the genes in these windows.
+I will use the data obtained in the mutation rate variation experiment described above to identify the genes mutated in each tissue.
+As mutations will be rare, I will map the mutations found to 10 megabase windows on the mouse reference genome.
+Then, I will identify the genes in these windows.
 
-The gene ontology is a controlled vocabulary used to describe the functions, associations, and cellular location of a particular gene product. I will associate each window with the gene ontology terms of the genes in that window and use a clustering algorithm to determine if the windows with mutations are annotated as specific to the tissue of the sample or not.%Additionally, I will determine whether the number of mutated cancer associated genes is higher than expected in any particular tissue.
-To rule out the effect of gene function, I will also see if genes that perform a class of functions are disproportionally mutated.
+The gene ontology is a controlled vocabulary used to describe the functions, associations, and cellular location of a particular gene product.
+I will associate each window with the gene ontology terms of the genes in that window and use a clustering algorithm to determine if the windows with mutations are annotated as specific to the tissue of the sample less than is expected by chance.
+To rule out the effect of gene function, I will also determine whether genes that perform a class of functions are disproportionally mutated.
 
 %By identifying annotation clusters that arise in each sample, I will determine if any genes with a particular function are mutated at a higher rate than expected. I will also use this information to determine whether genes associated with high activity in a particular tissue are more protected or more vulnerable to mutation in that particular tissue.
 
 \textbf{Anticipated Results:}
-My hypothesis is supported if I observe that windows containing genes specific to a particular tissue have more mutations in that tissue than in other tissues. Patterns in the function of genes mutated may help explain these differences.
-%If supercoiling is responsible for some of these differences, mutation rates in coding and noncoding regions should be similar.
-%If the set of cancer-associated and tissue specific genes are more highly mutated than expected, this would provide some evidence that tissue-specific differences in expression contribute to differences in cancer incidence.
+Methylation is an important factor for suppressing gene expression, but sometimes causes mutations.
+Simultaneously, transcription-coupled repair enhances the rate of DNA repair in highly-expressed regions\textsuperscript{4}.
+Therefore, in samples of a particular tissue I expect to see fewer somatic mutations in windows containing genes specifically expressed in that tissue.
+If this is the case, my hypothesis will be supported.
 
 \textbf{Intellectual Merit:}
 %How somatic mutations affect human development is poorly understood. However, there are many diseases, including some cancers, which arise from somatic mutation. By understanding the processes involved in somatic mutation in humans, this project will illuminate how somatic mutations cause disease, give insight into how to minimize somatic mutation rates and clarify how somatic mutations give rise to disease phenotypes. This information is clinically useful for preventing and treating diseases caused by somatic mutations. Furthermore, understanding differences in individual-by-individual somatic mutation rates may help explain variability in rates of somatic genetic disease as well as uncover risk factors.
-How rates of somatic mutation differ between different tissues is poorly understood. However, diseases such as cancer often arise by somatic mutation.
-This project represents a first step in more clearly understanding somatic mutation, how mutation rates vary within an individual, and how this variation contributes to variation in cancer incidence.
+How rates of somatic mutation differ between different tissues is poorly understood.
+However, diseases such as cancer often arise by somatic mutation.
+This project represents a first step in more clearly understanding somatic mutation in normal tissue, how mutation rates vary within an individual, and how gene expression does or does not affect somatic mutation.
 %This knowledge may later be applied to humans to improve cancer diagnosis, prevention, and treatment.
 
 \textbf{Broader Impacts:}
-Tobacco smoke is known to cause somatic mutations in the lungs, and studies have shown that smoking cessation dramatically lowers lung cancer risk\textsuperscript{1}.
-This indicates that management of somatic mutation is important for reducing cancer risk.
+% Tobacco smoke is known to cause somatic mutations in the lungs, and studies have shown that smoking cessation dramatically lowers lung cancer risk\textsuperscript{1}.
+% This indicates that management of somatic mutation is important for reducing cancer risk.
 Understanding the link between background somatic mutation rate and cancer incidence can be clinically useful for diagnosing, preventing, and treating the disease.
-This knowledge will help clarify theories of the evolution and maintenance of multicellularity.
-I will also generate a tissue phylogeny, useful for developmental biologists.
+This experiment will provide a comparative tool to greatly aid our understanding of how cancer deviates from normal patterns of somatic mutation.
+The project will also useful for developmental biologists to understand the genetic relationships between various tissues.
 Additionally, all data generated by the project will be deposited in a repository for public use and all computational analyses and tools developed for the project will be open source and freely available for modification and use.
 This will aid others who attempt to pursue similar analyses or wish to develop similar tools.
 This project will give me the opportunity to train an undergraduate data scientist to understand how to hand and analyze large amounts of data and develop computational tools for the biology community.
 I will also discuss this project at a future Night of the Open Door event to educate adults and children on somatic mutation and its relation to cancer.
-This will help people understand the biology behind why smoking cessation reduces cancer risk.
 I will additionally be better able to give insight on mutation to primary and secondary school students through the Ask a Biologist program, where these students submit questions to be answered by an expert.
 
 \begin{footnotesize}
 \textbf{References:}
-\textsuperscript{1}Miller Y.E \textit{Am J Respir Cell Mol Biol} (2005)
-%\textbf{2.)} Siegel \textit{et al. CA Cancer J Clin,} \textbf{63}, 11 (2013)
-\textsuperscript{2}Gilbert N., Allan J., \textit{Curr Opin Genet Dev} (2014)
-\textsuperscript{3}Frank S.A. \textit{Dynamics of Cancer: Incidence, Inheritance, and Evolution} (2007)
-\textsuperscript{4}Salipante S.J., Horwitz M.S., \textit{Proc Natl Acad Sci USA,} (2006)
-\textsuperscript{5}Uricaru R. \textit{et al. Nucleic Acids Res,} (2015)
+% \textsuperscript{1}Miller Y.E \textit{Am J Respir Cell Mol Biol} (2005)
+% \textbf{2.)} Siegel \textit{et al. CA Cancer J Clin,} \textbf{63}, 11 (2013)
+% \textsuperscript{2}Gilbert N., Allan J., \textit{Curr Opin Genet Dev} (2014)
+\textsuperscript{1}Frank S.A. \textit{Dynamics of Cancer: Incidence, Inheritance, and Evolution} (2007)
+\textsuperscript{2}Salipante S.J., Horwitz M.S., \textit{Proc Natl Acad Sci USA,} (2006)
+\textsuperscript{3}Uricaru R. \textit{et al. Nucleic Acids Res,} (2015)
+\textsuperscript{4}Hanawalt P.C., Spivak G., \textit{Nat. Rev. Mol. Cell Biol,} (2008)
+
 \end{footnotesize}
 
 \end{document}
