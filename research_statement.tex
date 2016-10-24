@@ -31,11 +31,11 @@ To address this hypothesis, I will work with mice labs at ASU to collect cerebel
 These tissues represent each of the germ layers and contain many epithelial tissues, which have high renewal rates\textsuperscript{1}.
 Most of these tissues have been successfully collected and used for cell fate mapping using a small subset of genomic markers\textsuperscript{2} and should therefore be suitable for finding mutations and provide a sufficient number of mutations for analysis.
 
-I will do whole-genome Illumina sequencing on each of my samples then use the Genome Analysis Toolkit to identify potential mutations.
+I will do whole-genome Illumina sequencing on each of my samples then use the Genome Analysis Toolkit (GATK) to identify potential mutations.
 This works by comparing the obtained sequencing data and comparing it to the mouse reference genome.
-However, as sequencing errors are common, a statistical model is necessary to determine if observed differences are true mutations or sequencing errors.
+However, as sequencing errors are common, the software must determine if observed differences are true mutations or sequencing errors.
 
-Most variant callers use models designed to identify germline mutations, and most designed for use on somatic tissue assume the sample is from a cancer tumor.
+Most variant callers are designed to identify germline mutations, and most designed for use on somatic tissue assume the sample is from a cancer tumor. This may impact the quality of mutations identified by the GATK.
 Therefore, I will also use the De Bruijn graph mutation caller DiscoSNP++\textsuperscript{3} to identify mutations.
 Rather than comparing to the reference genome, a De Bruijn graph mutation caller finds places where the sequences of different samples overlap except by one nucleotide, which is the location of the putative mutation.
 By comparing the results of these two distinct methods along with the results across replicates, I will obtain a set of likely somatic mutations across various tissues.
