@@ -6,6 +6,10 @@ Due to a rule change, graduate students are now allowed to apply only once for t
 However, my cohort was grandfathered in and allowed to submit in both the first and second year of graduate school.
 I hope this can be a resource for anyone applying to the program.
 
+##Results
+ * **2016** - Not awarded
+ * **2017** - Honorable Mention
+
 ##2017
 
 For my 2017 submission, I started with my 2016 submission and iterated based on feedback from the reviews and feedback from others.
